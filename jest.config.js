@@ -6,4 +6,7 @@ module.exports = {
   testEnvironment: "jsdom",
   transformIgnorePatterns: ["node_modules"],
   setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
+  moduleNameMapper: {
+    "\\.(css|less)$": "<rootDir>/spec/__mocks__/styleMock.js",
+  },
 };
