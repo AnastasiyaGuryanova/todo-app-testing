@@ -11,5 +11,5 @@
     "target": "esnext"
   },
   "include": ["src", "spec"],
-  "exclude": ["node_modules", "coverage"]
+  "exclude": ["node_modules", "coverage", "spec/__mocks__/styleMock.js"]
 }
