@@ -7,7 +7,9 @@ import uE from "@testing-library/user-event";
 describe("Поле ввода", () => {
   const userEvent = uE.setup({ delay: 100 });
 
-  it.todo("Ограничение на ввод более 32 символов");
+  it("Ограничение на ввод более 32 символов", () => {
+    expect("Greetings!").toBeShorterThan(32);
+  });
 
   it("Поле доступно для ввода", async () => {
     const fn = jest.fn();

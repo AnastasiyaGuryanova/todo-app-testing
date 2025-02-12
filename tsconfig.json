@@ -10,6 +10,6 @@
     "sourceMap": true,
     "target": "esnext"
   },
-  "include": ["src", "spec"],
+  "include": ["src", "spec", "jest.d.ts"],
   "exclude": ["node_modules", "coverage", "spec/__mocks__/styleMock.js"]
 }
