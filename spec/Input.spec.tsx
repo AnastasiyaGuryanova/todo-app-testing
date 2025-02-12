@@ -1,19 +1,24 @@
 import "@testing-library/jest-dom";
-import { prettyDOM, render } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { Input } from "../src/components/Input";
 
+import uE from "@testing-library/user-event";
+
 describe("Поле ввода", () => {
+  const userEvent = uE.setup({ delay: 100 });
+
   it.todo("Ограничение на ввод более 32 символов");
-  it("Поле доступно для ввода", () => {
+
+  it("Поле доступно для ввода", async () => {
     const fn = jest.fn();
-    const span = document.createElement("span");
 
-    const { container } = render(<Input value="Greetings" onChange={fn} />, {
-      container: document.body.appendChild(span),
-      hydrate: false,
-      legacyRoot: false,
-    });
+    render(<Input defaultValue="" onChange={fn} />);
 
-    console.log(prettyDOM(container));
+    const input = screen.getByRole("textbox");
+
+    await userEvent.click(input);
+    await userEvent.keyboard("Hello!");
+
+    expect(fn).toBeCalledWith("Hello!");
   });
 });
