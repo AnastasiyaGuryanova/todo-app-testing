@@ -1,19 +1,21 @@
-import { useState } from "react";
-import { Input } from "./components/Input";
-import { AddButton } from "./components/AddButton";
+import { store } from "./store/configureStore";
+
 import "./styles.css";
+import { NewTaskBar } from "./modules/NewTaskBar";
+import { TaskList } from "./modules/TaskList";
+import { Provider } from "react-redux";
+import { NotifierContainer } from "./modules/NotifierContainer";
+
 
 export const App = () => {
-  const [inputValue, setinputValue] = useState("");
-
-  const handleAddButtonClick = () => {
-    console.log("Button was clicked!");
-  };
-
   return (
     <div className="root-container">
-      <Input defaultValue={inputValue} onChange={(val) => setinputValue(val)} />
-      <AddButton onClick={handleAddButtonClick} />
+      <Provider store={store}>
+        <h3>Список задач</h3>
+        <NewTaskBar />
+        <TaskList />
+        <NotifierContainer />
+      </Provider>
     </div>
   );
 };

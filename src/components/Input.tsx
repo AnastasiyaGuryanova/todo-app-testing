@@ -1,48 +1,52 @@
-import { ChangeEvent, useState } from "react";
-import { validateHeader, headerFieldOptions } from "../utils/helpers";
+import { ChangeEvent, useMemo } from "react";
+
 import "./styles.css";
+import { headerFieldOptions, validateHeaderMax } from "src/utils/helpers";
 
 type Props = {
-  defaultValue: string;
+  value: string;
   onChange: (value: string) => void;
+  disabledMessage?: string;
+  disabled?: boolean;
 };
 
-export const Input = ({ defaultValue, onChange }: Props) => {
-  const [labelValue, setlabelValue] = useState("");
-  const [inputValue, setinputValue] = useState(defaultValue);
-
+export const Input = ({
+  value,
+  onChange,
+  disabledMessage,
+  disabled,
+}: Props) => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const val = event.target.value;
 
-    if (validateHeader(val)) {
-      setlabelValue("");
-      setinputValue(val);
-      onChange(val);
-    } else {
-      setlabelValue(headerFieldOptions.message);
-    }
+    onChange(val);
   };
 
-  return (
-    <div className="input-field" data-testid="input-container">
-      <label htmlFor="input-header-field-id" data-testid="input-label">
-        Заголовок задачи
-      </label>
+  const hintValue = useMemo(
+    () => (validateHeaderMax(value) ? "" : headerFieldOptions.message),
+    [value]
+  );
 
+  return (
+    <div className="input-field-wrapper" data-testid="input-container">
       <input
         id="input-header-field-id"
         type="text"
-        className="input-field-element input-field-node"
-        value={inputValue}
+        className="input-field-element input-field-node input-field-input"
+        value={value}
         onChange={handleChange}
-        placeholder={`например, введите "купить молоко"`}
+        placeholder={
+          disabled ? disabledMessage : `например, введите "купить молоко"`
+        }
         alt="поле для ввода заголовка задачи"
         title="поле для заголовка"
         data-testid="input-field"
         style={{ display: "flex" }}
+        disabled={disabled}
       />
-
-      <span data-testid="input-hint-text">{labelValue}</span>
+      <span data-testid="input-hint-text" className="input-field-hint">
+        {hintValue}
+      </span>
     </div>
   );
 };
