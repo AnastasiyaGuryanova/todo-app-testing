@@ -1,5 +1,5 @@
 const prod = process.env.NODE_ENV === "production";
-
+const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
@@ -8,6 +8,11 @@ module.exports = {
   entry: "./src/index.tsx",
   output: {
     path: __dirname + "/dist/",
+  },
+  resolve: {
+    alias: {
+      src: path.join(__dirname, "./src"),
+    },
   },
   module: {
     rules: [
@@ -22,6 +27,13 @@ module.exports = {
       {
         test: /.css$/,
         use: [MiniCssExtractPlugin.loader, "css-loader"],
+      },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        loader: "file-loader",
+        options: {
+          name: "public/icons/[name].[ext]",
+        },
       },
     ],
   },

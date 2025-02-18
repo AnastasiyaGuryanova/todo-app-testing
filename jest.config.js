@@ -7,6 +7,7 @@ module.exports = {
   transformIgnorePatterns: ["node_modules"],
   setupFilesAfterEnv: ["<rootDir>/jest.setup.js"],
   moduleNameMapper: {
-    "\\.(css|less)$": "<rootDir>/spec/__mocks__/styleMock.js",
+    "\\.(css|less|png)$": "<rootDir>/spec/__mocks__/styleMock.js",
+    "src(.*)$": "<rootDir>/src$1",
   },
 };

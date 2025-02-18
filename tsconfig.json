@@ -8,8 +8,12 @@
     "lib": ["dom", "esnext"],
     "strict": true,
     "sourceMap": true,
-    "target": "esnext"
+    "target": "esnext",
+    "outDir": "build",
+    "paths": {
+      "src/*": ["./src/*"]
+    }
   },
-  "include": ["src", "spec", "jest.d.ts"],
-  "exclude": ["node_modules", "coverage", "spec/__mocks__/styleMock.js"]
+  "include": ["src", "spec", "jest.d.ts", "global.d.ts"],
+  "exclude": ["node_modules", "coverage", "build"]
 }
