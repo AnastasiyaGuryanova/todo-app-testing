@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 
-import { toBeShorterThan } from "./spec/custom-matchers/toBeShorterThan";
-import { toHaveDoneItem } from "./spec/custom-matchers/toHaveDoneItem";
+import { toBeShorterThan } from "./spec/utils/custom-matchers/toBeShorterThan";
+import { toHaveDoneItem } from "./spec/utils/custom-matchers/toHaveDoneItem";
 
 import { toMatchDiffSnapshot } from "snapshot-diff";
 
