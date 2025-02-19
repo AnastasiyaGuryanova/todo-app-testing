@@ -5,11 +5,13 @@ import { RootState } from "./configureStore";
 export interface taskListState {
   list: Task[];
   notification: string;
+  filterActive: boolean;
 }
 
 const initialState: taskListState = {
   list: [],
   notification: "",
+  filterActive: false,
 };
 
 export const taskListSlice = createSlice({
@@ -23,6 +25,7 @@ export const taskListSlice = createSlice({
         done: false,
       });
     },
+
     completeTask: (state, action: PayloadAction<Task["id"]>) => {
       const task = state.list.find((x) => x.id === action.payload);
 
@@ -30,6 +33,7 @@ export const taskListSlice = createSlice({
         task.done = true;
       }
     },
+
     toggleTask: (state, action: PayloadAction<Task["id"]>) => {
       const task = state.list.find((x) => x.id === action.payload);
 
@@ -41,14 +45,21 @@ export const taskListSlice = createSlice({
         }
       }
     },
+
     deleteTask: (state, action: PayloadAction<Task["id"]>) => {
       state.list = state.list.filter((x) => x.id !== action.payload);
     },
+
     setNotification: (state, action: PayloadAction<Task["header"]>) => {
       state.notification = `Задача "${action.payload}" завершена`;
     },
+
     clearNotification: (state) => {
       state.notification = "";
+    },
+
+    toggleFilter: (state) => {
+      state.filterActive = !state.filterActive;
     },
   },
 });
@@ -59,6 +70,7 @@ export const {
   deleteTask,
   toggleTask,
   clearNotification,
+  toggleFilter,
 } = taskListSlice.actions;
 
 export default taskListSlice.reducer;
@@ -74,4 +86,10 @@ export const uncompleteCount = (state: RootState) =>
   state.taskList.list.filter((x) => !x.done).length;
 
 export const getNotification = (state: RootState) =>
-  state.taskList.notification
+  state.taskList.notification;
+
+export const filteredTasksSelector = (state: RootState) => {
+  return state.taskList.filterActive
+    ? state.taskList.list.filter((task) => !task.done)
+    : state.taskList.list;
+};
