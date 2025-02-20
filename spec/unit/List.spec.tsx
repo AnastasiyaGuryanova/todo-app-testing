@@ -36,4 +36,19 @@ it("отображение списка задач", () => {
   expect(firstRender).toMatchDiffSnapshot(secondRender);
 });
 
-it("Список содержит не больше 10 невыполненных задач", () => {});
+it("Список содержит не больше 10 невыполненных задач", () => {
+  const onDelete = jest.fn();
+  const onToggle = jest.fn();
+
+  const items = Array.from({ length: 11 }, (_, i) => ({
+    id: String(i),
+    header: `Задача ${i}`,
+    done: i >= 10,
+  }));
+
+  render(<List items={items} onDelete={onDelete} onToggle={onToggle} />);
+
+  const listItems = screen.getAllByRole("listitem");
+
+  expect(listItems.length).toBe(10);
+});
