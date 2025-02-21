@@ -7,11 +7,9 @@ type Props = {
 };
 
 export const List = ({ items, onDelete, onToggle }: Props) => {
-  const visibleItems = items.filter((item) => !item.done).slice(0, 10);
-
   return (
     <ul className="task-list tasks">
-      {visibleItems.map((item) => (
+      {items.map((item) => (
         <Item {...item} key={item.id} onDelete={onDelete} onToggle={onToggle} />
       ))}
     </ul>

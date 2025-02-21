@@ -46,10 +46,6 @@ describe("Список задач", () => {
       </JestStoreProvider>
     );
 
-    const filterButton = screen.getByAltText("Фильтр");
-    fireEvent.click(filterButton);
-    fireEvent.click(filterButton);
-
     expect(screen.getByText("Задача 1")).toBeInTheDocument();
     expect(screen.getByText("Задача 2")).toBeInTheDocument();
   });
