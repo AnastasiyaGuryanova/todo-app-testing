@@ -50,8 +50,10 @@ it("Не больше 10 новых задач", async () => {
     .spyOn(taskSliceModule, "uncompleteCount")
     .mockReturnValue(10);
 
-  render(<NewTaskBar />, {
-    wrapper: JestStoreProvider,
+  await act(async () => {
+    render(<NewTaskBar />, {
+      wrapper: JestStoreProvider,
+    });
   });
 
   const inputEl = screen.getByRole("textbox");
@@ -59,13 +61,19 @@ it("Не больше 10 новых задач", async () => {
 
   expect(inputEl).toBeDisabled();
   expect(addBtnEl).toBeDisabled();
+
+  spied.mockRestore();
 });
 
 it("Блокировка ввода и кнопки при 10 невыполненных задачах", async () => {
-  jest.spyOn(taskSliceModule, "uncompleteCount").mockReturnValue(10);
+  const spied = jest
+    .spyOn(taskSliceModule, "uncompleteCount")
+    .mockReturnValue(10);
 
-  render(<NewTaskBar />, {
-    wrapper: JestStoreProvider,
+  await act(async () => {
+    render(<NewTaskBar />, {
+      wrapper: JestStoreProvider,
+    });
   });
 
   const inputEl = screen.getByRole("textbox");
@@ -73,4 +81,6 @@ it("Блокировка ввода и кнопки при 10 невыполне
 
   expect(inputEl).toBeDisabled();
   expect(addBtnEl).toBeDisabled();
+
+  spied.mockRestore();
 });
