@@ -1,10 +1,17 @@
 import { Provider } from "react-redux";
-import { store } from "src/store/configureStore";
+import { configureStore } from "@reduxjs/toolkit";
+import taskReducer from "src/store/taskSlice";
 
 type Props = {
-    children: React.ReactNode
-}
+  children: React.ReactNode;
+  preloadedState?: object;
+};
 
-export const JestStoreProvider = ({ children }: Props) => (
-    <Provider store={store}>{children}</Provider>
-);
+export const JestStoreProvider = ({ children, preloadedState = {} }: Props) => {
+  const testStore = configureStore({
+    reducer: { taskList: taskReducer },
+    preloadedState,
+  });
+
+  return <Provider store={testStore}>{children}</Provider>;
+};

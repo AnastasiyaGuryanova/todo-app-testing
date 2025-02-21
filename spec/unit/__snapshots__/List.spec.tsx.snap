@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`отображение списка задач 1`] = `
+exports[`List отображение списка задач 1`] = `
 "Snapshot Diff:
 - First value
 + Second value
