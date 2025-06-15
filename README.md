@@ -27,26 +27,6 @@
 - React Testing Library
 - Webpack
 
-## 🚀 Установка и запуск
-
-1. Склонируйте репозиторий:
-
-   ```bash
-   git clone git@github.com:AnastasiyaGuryanova/use-local-storage.git
-
-   ```
-
-2. Перейдите в папку проекта:
-
-   ```bash
-   cd use-local-storage
-   ```
-
-3. Установите зависимости:
-
-   ```bash
-   npm install
-   ```
 
 ## 🚀 Установка и запуск
 
