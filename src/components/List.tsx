@@ -6,14 +6,12 @@ type Props = {
   onToggle: (id: Task["id"]) => void;
 };
 
-export const List = ({ items, onDelete, onToggle }: Props) => (
-  <ul className="task-list tasks">
-    {items.map((item) => (
-      <Item
-        {...item}
-        key={item.id}
-        onDelete={onDelete}
-        onToggle={onToggle} />
-    ))}
-  </ul>
-);
+export const List = ({ items, onDelete, onToggle }: Props) => {
+  return (
+    <ul className="task-list tasks">
+      {items.map((item) => (
+        <Item {...item} key={item.id} onDelete={onDelete} onToggle={onToggle} />
+      ))}
+    </ul>
+  );
+};
