@@ -1,0 +1,20 @@
+{
+  "preloadedState": {
+    "taskList": {
+      "list": [
+        { "id": "1", "header": "Задача 1", "done": false },
+        { "id": "2", "header": "Задача 2", "done": true }
+      ],
+      "filterActive": false
+    }
+  },
+  "preloadedStateAllDone": {
+    "taskList": {
+      "list": [
+        { "id": "1", "header": "Задача 1", "done": true },
+        { "id": "2", "header": "Задача 2", "done": true }
+      ],
+      "filterActive": false
+    }
+  }
+}
