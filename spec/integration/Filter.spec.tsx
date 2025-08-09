@@ -1,31 +1,12 @@
 import { render, screen, fireEvent } from "@testing-library/react";
 import { NewTaskBar, TaskList } from "src/modules";
 import { JestStoreProvider } from "../utils/JestStoreProvider";
-
-const preloadedState = {
-  taskList: {
-    list: [
-      { id: "1", header: "Задача 1", done: false },
-      { id: "2", header: "Задача 2", done: true },
-    ],
-    filterActive: false,
-  },
-};
-
-const preloadedStateAllDone = {
-  taskList: {
-    list: [
-      { id: "1", header: "Задача 1", done: true },
-      { id: "2", header: "Задача 2", done: true },
-    ],
-    filterActive: false,
-  },
-};
+import tasksData from "../__mocks__/tasks.json";
 
 describe("Список задач", () => {
   it("с включенным фильтром - показывает только невыполненные задачи", () => {
     render(
-      <JestStoreProvider preloadedState={preloadedState}>
+      <JestStoreProvider preloadedState={tasksData.preloadedState}>
         <NewTaskBar />
         <TaskList />
       </JestStoreProvider>
@@ -40,7 +21,7 @@ describe("Список задач", () => {
 
   it("с выключенным фильтром - показывает все задачи", () => {
     render(
-      <JestStoreProvider preloadedState={preloadedState}>
+      <JestStoreProvider preloadedState={tasksData.preloadedState}>
         <NewTaskBar />
         <TaskList />
       </JestStoreProvider>
@@ -52,7 +33,7 @@ describe("Список задач", () => {
 
   it("фильтр скрывает все задачи, если все задачи выполнены", () => {
     render(
-      <JestStoreProvider preloadedState={preloadedStateAllDone}>
+      <JestStoreProvider preloadedState={tasksData.preloadedStateAllDone}>
         <NewTaskBar />
         <TaskList />
       </JestStoreProvider>
